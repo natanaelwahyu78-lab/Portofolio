@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Natanael</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    color: white;
+
+    background:
+        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+        url('background.jpg') no-repeat center center/cover;
+}
+
+/* Container */
+.container {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* Glass */
+.glass {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 25px;
+    padding: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+
+    transition: all 0.4s cubic-bezier(.2,.8,.2,1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Layout beda */
+.header { grid-column: span 3; text-align: center; }
+.about { grid-column: span 2; }
+.project { grid-column: span 1; }
+.contact { grid-column: span 3; }
+
+/* Hover */
+.glass:hover {
+    transform: scale(1.03);
+}
+
+/* Morph */
+.glass.active {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.05);
+    width: 80%;
+    max-width: 600px;
+    z-index: 999;
+
+    border-radius: 35px;
+    padding: 40px;
+
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(30px) saturate(200%);
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Text */
+h1, h2 { margin: 0 0 10px; }
+p { opacity: 0.8; }
+
+/* Instagram Button */
+.ig-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+
+    color: white;
+    text-decoration: none;
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    transition: 0.3s;
+}
+
+.ig-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255,255,255,0.3);
+}
+
+/* Animasi masuk */
+.fade {
+    animation: fade 1s ease;
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="glass header fade"> 
+        <h1>Natanael</h1>
+        <p>Creative Developer</p>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="glass about fade">
+        <h2>Tentang Saya</h2>
+        <p>Saya suka membuat UI futuristik seperti iOS dan teknologi modern.</p>
+    </div>
+
+    <!-- PROJECT -->
+    <div class="glass project fade">
+        <h2>Project 1</h2>
+        <p>Glass UI Website</p>
+    </div>
+
+    <div class="glass project fade">
+        <h2>Project 2</h2>
+        <p>Landing Page</p>
+    </div>
+
+    <div class="glass project fade">
+        <h2>Project 3</h2>
+        <p>UI Design</p>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="glass contact fade">
+        <h2>Kontak</h2>
+        <p>Email: natanaelwahyu78@gmail.com@gmail.com</p>
+
+        <a href="https://instagram.com/nnell.idc" target="_blank" class="ig-btn">
+            📸 Instagram
+        </a>
+    </div>
+
+</div>
+
+<script>
+const cards = document.querySelectorAll('.glass');
+const overlay = document.getElementById('overlay');
+
+cards.forEach(card => {
+    card.addEventListener('click', () => {
+        card.classList.add('active');
+        overlay.classList.add('show');
+    });
+});
+
+overlay.addEventListener('click', () => {
+    document.querySelectorAll('.glass').forEach(c => c.classList.remove('active'));
+    overlay.classList.remove('show');
+});
+</script>
+
+</body>
+</html>
